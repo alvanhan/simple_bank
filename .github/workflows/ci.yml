@@ -21,7 +21,7 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: secret
           POSTGRES_DB: simple_bank
-          ports:
+        ports:
           - 5432:5432
         options: >-
           --health-cmd pg_isready
@@ -36,9 +36,9 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: 1.19
-    - name: Install golang-migrate
+    - name: insall migration go
       run: |
-        curl -L https://github.com/golang-migrate/migrate/releases/download/v4.12.2/migrate.linux-amd64.tar.gz | tar xvz
+        curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-amd64.tar.gz | tar xvz
         sudo mv migrate.linux-amd64 /usr/bin/migrate
         which migrate
 
