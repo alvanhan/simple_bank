@@ -15,4 +15,9 @@ migratedown:
 
 sqlc:
 	docker run --rm -v "E:\simple\simple_bank\:/src" -w /src kjconroy/sqlc generate
+
+git:
+	git add .
+	git commit -m "$m"
+	git push origin main
 .PHONY: postgres createdb dropdb migrateup migratedown sqlc
