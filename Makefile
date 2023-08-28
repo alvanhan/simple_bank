@@ -20,4 +20,12 @@ git:
 	git add .
 	git commit -m "$m"
 	git push origin main
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc
+
+test:
+	go test -v -cover ./...
+
+requirement:
+	go get github.com/lib/pq
+	go get github.com/stretchr/testify
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test
