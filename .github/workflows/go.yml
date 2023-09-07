@@ -32,16 +32,13 @@ jobs:
           go-version: '1.20'
 
       - name: Install migrate tool
-        run: go get -tags 'postgres' -u github.com/golang-migrate/migrate/cmd/migrate
-
-      - name: Verify migrate installation
-        run: $HOME/go/bin/migrate -version
-
-      - name: Display GOPATH/bin contents
-        run: ls $HOME/go/bin
+        run: |
+          curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
+          mv migrate.linux-amd64 /usr/bin/
+          which migrate
 
       - name: Run Migration
-        run: $HOME/go/bin/migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose up
+        run: make migrateup
 
       - name: Build
         run: go build -v ./...
