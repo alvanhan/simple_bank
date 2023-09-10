@@ -16,6 +16,9 @@ migratedown:
 sqlc:
 	docker run --rm -v "E:\simple\simple_bank\:/src" -w /src kjconroy/sqlc generate
 
+mock:
+	mockgen -package mockdb  -destination db/mock/store.go  github.com/alvanhan/simple_bank/db/sqlc Store
+
 git:
 	git add .
 	git commit -m "$m"
@@ -33,4 +36,4 @@ requirement:
 	go get -u github.com/gin-gonic/gin
 	go get github.com/spf13/viper
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server mock
