@@ -24,8 +24,13 @@ git:
 test:
 	go test -v -cover ./...
 
+server:
+	go run main.go
+
 requirement:
 	go get github.com/lib/pq
 	go get github.com/stretchr/testify
+	go get -u github.com/gin-gonic/gin
+	go get github.com/spf13/viper
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server

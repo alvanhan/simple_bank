@@ -3,7 +3,7 @@
 //   sqlc v1.20.0
 // source: entry.sql
 
-package db
+package simple_bank
 
 import (
 	"context"
@@ -19,8 +19,8 @@ INSERT INTO entries (
 `
 
 type CreateEntryParams struct {
-	AccountID int64 `json:"account_id"`
-	Amount    int64 `json:"amount"`
+	AccountID int64
+	Amount    int64
 }
 
 func (q *Queries) CreateEntry(ctx context.Context, arg CreateEntryParams) (Entry, error) {
@@ -61,9 +61,9 @@ LIMIT $2
 `
 
 type ListEntriesParams struct {
-	AccountID int64 `json:"account_id"`
-	Limit     int32 `json:"limit"`
-	Offset    int32 `json:"offset"`
+	AccountID int64
+	Limit     int32
+	Offset    int32
 }
 
 func (q *Queries) ListEntries(ctx context.Context, arg ListEntriesParams) ([]Entry, error) {
@@ -72,7 +72,7 @@ func (q *Queries) ListEntries(ctx context.Context, arg ListEntriesParams) ([]Ent
 		return nil, err
 	}
 	defer rows.Close()
-	items := []Entry{}
+	var items []Entry
 	for rows.Next() {
 		var i Entry
 		if err := rows.Scan(

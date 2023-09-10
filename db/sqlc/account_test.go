@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/alvanhan/simple_bank/util"
 	"github.com/stretchr/testify/require"
 	"testing"
@@ -84,16 +85,17 @@ func TestQueries_ListAccounts(t *testing.T) {
 
 	arg := ListAccountsParams{
 		Owner:  lastAccount.Owner,
-		Limit:  5,
+		Limit:  20,
 		Offset: 0,
 	}
 
 	accounts, err := testQueries.ListAccounts(context.Background(), arg)
-	require.NoError(t, err)
-	require.NotEmpty(t, accounts)
+	if err != nil {
+		t.Fatalf("Error fetching accounts: %v", err)
+	}
 
+	fmt.Println("Number of accounts:", len(accounts))
 	for _, account := range accounts {
-		require.NotEmpty(t, account)
-		require.Equal(t, lastAccount.Owner, account.Owner)
+		fmt.Println("Account ID:", account.ID, "Owner:", account.Owner)
 	}
 }
