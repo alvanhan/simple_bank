@@ -97,14 +97,3 @@ func (server *Server) listAccounts(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, accounts)
 }
-
-func (server *Server) ListAccountsAlldata(ctx *gin.Context) {
-
-	accounts, err := server.store.ListAccountsAlldata(ctx)
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-		return
-	}
-
-	ctx.JSON(http.StatusOK, accounts)
-}

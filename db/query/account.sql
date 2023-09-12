@@ -38,6 +38,3 @@ RETURNING *;
 DELETE FROM accounts
 WHERE id = $1;
 
--- name: ListAccountsAlldata :many
-SELECT * FROM accounts
-ORDER BY created_at;
