@@ -30,6 +30,11 @@ git:
 	git commit -m "$m"
 	git push origin main
 
+git_docker:
+	git add .
+	git commit -m "$m"
+	git push origin ft/docker
+
 test:
 	go test -v -cover ./...
 
