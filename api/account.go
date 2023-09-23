@@ -38,7 +38,8 @@ func (server *Server) createAccount(ctx *gin.Context) {
 
 	account, err := server.store.CreateAccount(ctx, arg)
 	if err != nil {
-		if pqErr, ok := err.(*pq.Error); ok {
+		var pqErr *pq.Error
+		if errors.As(err, &pqErr) {
 			switch pqErr.Code.Name() {
 			case "foreign_key_violation", "unique_violation":
 				ctx.JSON(http.StatusForbidden, errorResponse(err))
@@ -71,8 +72,9 @@ func (server *Server) getAccount(ctx *gin.Context) {
 	}
 	authPlayload := ctx.MustGet(authorizationHPayloadKey).(*token.Payload)
 	if account.Owner != authPlayload.Username {
-		err := errors.New("Account dosent exist!!")
+		err := errors.New("account dosent exist")
 		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
 	}
 	ctx.JSON(http.StatusOK, account)
 }
