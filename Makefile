@@ -28,7 +28,7 @@ mock:
 git:
 	git add .
 	git commit -m "$m"
-	git push origin main
+	git push origin ft/docker
 
 git_docker:
 	git add .
