@@ -17,6 +17,16 @@ COPY start.sh .
 COPY wait-for .
 COPY db/migration ./migration
 
+# Tambahkan perintah ini untuk memberikan izin eksekusi pada start.sh
+RUN chmod +x /app/start.sh
+
+# Tambahkan pengguna non-root yang akan digunakan oleh container
+RUN adduser -D myuser
+
+# Set owner dari file ke pengguna yang baru dibuat
+RUN chown -R myuser:myuser /app
+
+USER myuser
 EXPOSE 8080
 CMD ["/app/main"]
 ENTRYPOINT ["/app/start.sh"]

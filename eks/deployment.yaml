@@ -12,10 +12,10 @@ spec:
   template:
     metadata:
       labels:
-        app:  simple-bank-api
+        app: simple-bank-api
     spec:
       containers:
         - name: nginx
-          image:
+          image: 743739442960.dkr.ecr.ap-southeast-1.amazonaws.com/simplebank:c681657b391a9df9fd407e4ac236deb57e7e5c4c
           ports:
-            - containerPort: 80
+            - containerPort: 8080
