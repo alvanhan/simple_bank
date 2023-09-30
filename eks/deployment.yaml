@@ -15,7 +15,7 @@ spec:
         app: simple-bank-api
     spec:
       containers:
-        - name: nginx
-          image: 743739442960.dkr.ecr.ap-southeast-1.amazonaws.com/simplebank:c681657b391a9df9fd407e4ac236deb57e7e5c4c
+        - name: simple-bank-api
+          image: 743739442960.dkr.ecr.ap-southeast-1.amazonaws.com/simplebank:307c651c5a75637048059b380926e5243ae6d3c1
           ports:
             - containerPort: 8080
